@@ -40,7 +40,7 @@ export class SkillRequirement {
 
                 case SkillRequirement.name:
                     requiredItem.requiredItems.forEach(subRequirement => {
-                        (SkillRequirement)(subRequirement).getParentSkills().forEach(parentSkill => {
+                        subRequirement.getParentSkills().forEach(parentSkill => {
                             parentSkills.add((SkillNode)(parentSkill));
                         })
                     });

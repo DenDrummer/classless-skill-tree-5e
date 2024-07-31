@@ -4,7 +4,7 @@ import { SkillRequirement } from "./SkillRequirement.js";
 export class MultiSkillRequirement extends SkillRequirement {
     /** 
      * Create a requirement group
-     * @param {"AND" | "OR" | "XOR" | "N"} requiredNumber The number of items required to unlock the parent item.
+     * @param {number} requiredNumber The number of these items required to unlock the parent item.
      * @param {[RequiredSkill | SkillRequirement]} requiredItems An array of required items. These items are either a {@link SkillNode} or a {@link RequiredSkill}.  
      *    This list must contain at least one valid item to be valid.
     */

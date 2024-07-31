@@ -23,7 +23,7 @@ export class SkillTree {
     
     /**
      * 
-     * @returns {boolean} a list of {@link SkillNode}s that have no requirements, and thus are root nodes.
+     * @returns {[SkillNode]} a list of {@link SkillNode}s that have no requirements, and thus are root nodes.
      * Root nodes are always unlocked.
      */
     findRootNodes() {
@@ -40,34 +40,44 @@ export class SkillTree {
      */
     validateTree() {
         const errorMessages = [];
+
+        //#region --- AT LEAST ONE ROOT NODE ---
         if (this.rootNodes.length == 0
         ) {
-            errorMessages.add("There are no root-nodes. Make sure you have at least 1 node without requirements");
+            errorMessages.push("There are no root-nodes. Make sure you have at least 1 node without requirements");
         }
+        //#endregion --- AT LEAST ONE ROOT NODE ---
 
+        //#region --- ALL SKILL NODE IDS UNIQUE ---
         const skillIds = new Set();
         const warnedIds = new Set();
         this.skillNodes.forEach(skillNode => {
             const id = skillNode.id;
 
+            // also check if the node itself is valid
+            errorMessages.push(...(skillNode.validate()));
+
             if (skillIds.has(id) && !warnedIds.has(id)) {
-                errorMessages.add(`Multiple nodes with id "${id}".`);
+                errorMessages.push(`Multiple nodes with id "${id}".`);
                 warnedIds.add(id);
             } else {
                 skillIds.add(id);
             }
         });
+        //#endregion --- ALL SKILL NODE IDS UNIQUE ---
 
+        //#region --- ALL REQUIREMENTS VALID ---
         this.skillNodes.forEach(skillNode => {
             skillNode.requirements.forEach(requirement => {
                 const parentSkills = requirement.getParentSkills()
                 parentSkills.forEach(parentSkill => {
                     if (!skillIds.has(parentSkill.id)) {
-                        errorMessages.add(`Skill "${skillNode.id}" requires skill "${parentSkill.id}", which does not exist in this skill tree.`);
+                        errorMessages.push(`Skill "${skillNode.id}" requires skill "${parentSkill.id}", which does not exist in this skill tree.`);
                     }
                 })
             });
         });
+        //#endregion --- ALL REQUIREMENTS VALID ---
 
         return errorMessages;
     }
