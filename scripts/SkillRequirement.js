@@ -22,18 +22,22 @@ export class SkillRequirement {
     }
 
     /**
-     * Gets all skills this requirement and its sub-requirements depend upon
+     * Gets all skills this requirement (and its sub-requirements) depend upon
      * @returns {Set<SkillNode>}
      */
     getParentSkills() {
         let parentSkills = new Set();
 
         this.requiredItems.forEach(requiredItem => {
-            switch (Object.getPrototypeOf(requiredItem).constructor.name) {
+            // Object.getPrototypeOf(x).constructor.name is used to get which of the possible classes it was
+            // if you know an easier way... PLEASE tell me
+            const itemType = Object.getPrototypeOf(requiredItem).constructor.name;
+
+            switch (itemType) {
                 case RequiredSkill.name:
                     parentSkills.add(requiredItem.skill);
                     break;
-            
+
                 case SkillRequirement.name:
                     requiredItem.requiredItems.forEach(subRequirement => {
                         (SkillRequirement)(subRequirement).getParentSkills().forEach(parentSkill => {
@@ -41,9 +45,9 @@ export class SkillRequirement {
                         })
                     });
                     break;
-                
+
                 default:
-                    throw new Error(`Unknown item in list of requiredItems:\nType of: ${typeof requiredItem}\n${requiredItem}`);
+                    throw new Error(`Unknown item in list of requiredItems:\nType of: ${itemType}\n${requiredItem}`);
             }
         });
 
