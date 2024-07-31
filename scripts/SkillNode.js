@@ -1,42 +1,49 @@
+import { RequiredSkill } from "./RequiredSkill.js";
+import { SkillRequirement } from "./SkillRequirement.js";
+import { SkillTree } from "./SkillTree.js";
+
+/**
+ * A class representing a node in the {@link SkillTree}
+ */
 export class SkillNode {
-    x = 0;
-    y = 0;
-    id = 'default';
-    title = 'Default';
-    description = 'Default skill node';
-    childNodes = Array<SkillNode>([]);
+    /**
+     * Creates a new node representing a skill.
+     * @param {string} id The id of the skill, used to link a {@link RequiredSkill} to this one.
+     * Only shown and editable in GM-view.
+     * @param {string} title The title of the skill.
+     * Should be a single line of text. 
+     * @param {string} description The title of the skill
+     * @param {string} color 
+     * @param {number} x The horizontal position of the node in the {@link SkillTree}.  
+     * 0 is intended to be the "center" and positive numbers are to the right of it.
+     * @param {number} y The vertical position of the node in the {@link SkillTree}.  
+     * 0 is intended to be the "center" and positive numbers are down of it.
+     * @param {[SkillRequirement]} [requirements=[]] A list of other require
+     * @param {number} [level=0] The current amount of times this node has been bought.
+     */
+    constructor(
+        id,
+        title,
+        description,
+        color,
+        x,
+        y,
+        requirements = [],
+        level = 0
+    ) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.requirements = requirements;
+        this.color = color;
+        this.x = x;
+        this.y = y;
+        this.level = level;
 
-    constructor() {
-        this.childNodes = [];
         console.log("CST5E | SkillNode instance created");
+        console.log(this);
     }
-
-    validateTree(treePath){
-        console.log("CST5E | Validating Tree Path: " + treePath);
-
-        const pathNodes = treePath.split(".")
-
-        let nodeA, nodeB;
-        for (let i = 0; i < pathNodes.length; i++) {
-            nodeA = pathNodes[i];
-
-            for (let j = i+1; j < pathNodes.length; j++) {
-                nodeB = pathNodes[j];
-
-                if (nodeA===nodeB) {
-                    return false;
-                }
-            }
-        }
-
-        childNodes.forEach(childNode => {
-            if(!childNode.validateTree(treePath+"."+childNode.id)){
-                return false;
-            }
-        });
-        
-        return true;
-    }
+    
 }
 
 console.log("CST5E | SkillNode Loaded");
