@@ -29,26 +29,17 @@ export class SkillRequirement {
         let parentSkills = new Set();
 
         this.requiredItems.forEach(requiredItem => {
-            if (Object.getPrototypeOf(requiredItem) instanceof RequiredSkill) {
-                parentSkills.add(requiredItem.skill);
-            }
-            else if (Object.getPrototypeOf(requiredItem) instanceof SkillRequirement) {
-                requiredItem.requiredItems.forEach(subRequirement => {
-                    (SkillRequirement)(subRequirement).getParentSkills().forEach(parentSkill => {
-                        parentSkills.add((SkillNode)(parentSkill));
-                    })
-                });
-            }
-            else {
-                throw new Error(`Unknown item in list of requiredItems:\nType of: ${typeof requiredItem}\n${requiredItem}`);
-            }
-
-            switch (typeof requiredItem) {
-                case typeof RequiredSkill:
+            switch (Object.getPrototypeOf(requiredItem).constructor.name) {
+                case RequiredSkill.name:
                     parentSkills.add(requiredItem.skill);
                     break;
             
-                case typeof SkillRequirement:
+                case SkillRequirement.name:
+                    requiredItem.requiredItems.forEach(subRequirement => {
+                        (SkillRequirement)(subRequirement).getParentSkills().forEach(parentSkill => {
+                            parentSkills.add((SkillNode)(parentSkill));
+                        })
+                    });
                     break;
                 
                 default:

@@ -33,7 +33,11 @@ Hooks.on("init", () => {
             new SkillRequirement(
                 "OR",
                 [
-                    testSkillNode
+                    new RequiredSkill(
+                        testSkillNode,
+                        1,
+                        "<="
+                    )
                 ]
             )
         ]

@@ -7,8 +7,9 @@ export class RequiredSkill{
      * @param {SkillNode} skill The {@link SkillNode} that is being depended on.
      * @param {number = 1} [requiredLevel] The level the required skill is being compared to. Defaults to 1.
      * @param {"<" | "<=" | "==" | ">=" | ">"} [requirementType] 
+     * @param {boolean} [drawLine] 
     */
-    constructor(skill, requiredLevel = 1, requirementType) {
+    constructor(skill, requiredLevel = 1, requirementType = "<=", drawLine = true) {
         this.skill = skill;
         this.requiredLevel = requiredLevel;
         this.requirementType = requirementType;
