@@ -1,43 +1,40 @@
 {
-  "authors": [
-    {
-      "discord": "Den_drummer",
-      "flags": {},
-      "name": "Den_drummer"
-    }
-  ],
-  "compatibility": {
-    "minimum": "12",
-    "verified": "12.330"
-  },
-  "description": "An attempt at a classless skill tree addon for 5E inspired by The Ugly Goblin on Youtube.\nPlans to include their skill trees as presets if given permission.",
-  "documentTypes": {},
-  "esmodules": [
-    "scripts/Main.js"
-  ],
-  "id": "classless-skill-tree-5e",
-  "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "languages/en.json"
-    }
-  ],
-  "relationships": {
-    "systems": [
-      {
-        "compatibility": {
-          "minimum": "3",
-          "verified": "3.3.1"
-        },
-        "id": "dnd5e",
-        "type": "system"
-      }
-    ]
-  },
-  "styles": [
-    "styles/SkillTree.css"
-  ],
-  "title": "Classless Skill Tree 5e",
-  "version": "0.0.2"
+    "authors": [
+        {
+            "discord": "Den_drummer",
+            "flags": {},
+            "name": "Den_drummer"
+        }
+    ],
+    "compatibility": {
+        "minimum": "12",
+        "verified": "12.330"
+    },
+    "description": "An attempt at a classless skill tree addon for 5E inspired by The Ugly Goblin on Youtube.\nPlans to include their skill trees as presets if given permission.",
+    "esmodules": ["scripts/Main.js"],
+    "id": "classless-skill-tree-5e",
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "languages/en.json",
+            "flags": {}
+        }
+    ],
+    "relationships": {
+        "systems": [
+            {
+                "compatibility": {
+                    "minimum": "3",
+                    "verified": "3.3.1"
+                },
+                "id": "dnd5e",
+                "type": "system"
+            }
+        ]
+    },
+    "styles": ["styles/SkillTree.css"],
+    "title": "Classless Skill Tree 5e",
+    "version": "0.0.2",
+    "url": "https://github.com/DenDrummer/classless-skill-tree-5e"
 }

@@ -1,17 +1,24 @@
+import { ClasslessSkillTree5E } from "./ClassLessSkillTree.js";
 import { RequiredSkill } from "./RequiredSkill.js";
 import { SkillNode } from "./SkillNode.js";
 import { SkillRequirement } from "./SkillRequirement.js";
 import { SkillTree } from "./SkillTree.js";
+import { SkillTreeUtils } from "./SkillTreeUtils.js";
 
-console.log("CST5E | Main Loaded!");
+SkillTreeUtils.log(false, "Main Loaded!");
 
-Hooks.on("init", () => {
-    console.log("CST5E | Main Initialized!");
+Hooks.once("devModeReady", ({ registerPackageDebugFlag }) => {
+    SkillTreeUtils.log(false, "Dev Mode Ready");
+    registerPackageDebugFlag(ClasslessSkillTree5E.ID);
 });
 
 Hooks.on("init", () => {
-    console.log("CST5E | Main Available!");
-    
+    SkillTreeUtils.log(false, "Main Initialized!");
+});
+
+Hooks.on("ready", () => {
+    SkillTreeUtils.log(false, "Main Available!");
+
     const testSkillNode = new SkillNode(
         "TestNode",
         "Test Node",
@@ -30,32 +37,22 @@ Hooks.on("init", () => {
         100,
         0,
         [
-            new SkillRequirement(
-                "OR",
-                [
-                    new RequiredSkill(
-                        testSkillNode,
-                        1,
-                        "<="
-                    )
-                ]
-            )
+            new SkillRequirement("OR", [
+                new RequiredSkill(testSkillNode, 1, "<="),
+            ]),
         ]
-    )
-    
+    );
+
     const testSkillTree = new SkillTree(
         "Test Tree",
         "This is a test to see if the Skill Tree class works.",
-        [
-            testSkillNode,
-            testDependentNode
-        ]
+        [testSkillNode, testDependentNode]
     );
 
     const errorMessages = testSkillTree.validateTree();
     if (errorMessages.length > 0) {
-        console.log("CST5E | Errors found in the Skill Tree:");
-        errorMessages.forEach(errorMsg => {
+        SkillTreeUtils.log(false, "Errors found in the Skill Tree:");
+        errorMessages.forEach((errorMsg) => {
             console.warn(`CST5E | ${errorMsg}`);
         });
     }
