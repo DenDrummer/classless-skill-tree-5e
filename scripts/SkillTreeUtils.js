@@ -7,12 +7,12 @@ export class SkillTreeUtils {
     /**
      * Checks if an id is valid
      * @param {string} id the id you want to check the validity of.  \
-     *      Uses the Regular Expression `/^[a-zA-Z0-9]+([_\-]?[a-zA-Z0-9]+)*$/`  \
+     *      Uses the Regular Expression `/^[a-zA-Z][a-zA-Z\d]*([_\-][a-zA-Z\d]+)*$/`  \
      *      This means that the id must be alphanumeric, but may have dashes and underscores in the middle, one at a time.
      * @returns {boolean} true if this is a valid id, false if it is invalid.
      */
     static isValidId(id) {
-        return id.match(/^[a-zA-Z]+([_\-]?[a-zA-Z0-9]+)*$/).length > 0;
+        return id.match(/^[a-zA-Z][a-zA-Z\d]*([_\-][a-zA-Z\d]+)*$/).length > 0;
     }
 
     /**
@@ -22,7 +22,7 @@ export class SkillTreeUtils {
      * @returns {boolean} true if this is a valid HEX color code, false if it is invalid.
      */
     static isValidColor(color) {
-        return color.match(/^#[0-9A-F]{6}$/).length > 0;
+        return color.match(/^#[\dA-F]{6}$/).length > 0;
     }
 
     /**
