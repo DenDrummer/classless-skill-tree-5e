@@ -35,6 +35,39 @@
     },
     "styles": ["styles/SkillTree.css"],
     "title": "Classless Skill Tree 5e",
-    "version": "0.0.2",
-    "url": "https://github.com/DenDrummer/classless-skill-tree-5e"
+    "version": "0.0.3",
+    "url": "https://github.com/DenDrummer/classless-skill-tree-5e",
+    "packFolders": [
+        {
+            "name": "Classless Skill Tree 5E",
+            "sorting": "a",
+            "packs": ["cst5e-items", "cst5e-journals"],
+            "color": null,
+            "folders": []
+        }
+    ],
+    "packs": [
+        {
+            "name": "cst5e-items",
+            "label": "CST5E - Items",
+            "path": "packs/cst5e-items",
+            "type": "Item",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            },
+            "system": "dnd5e"
+        },
+        {
+            "name": "cst5e-journals",
+            "label": "CST5E - Journals",
+            "path": "packs/cst5e-journals",
+            "type": "JournalEntry",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            },
+            "system": "dnd5e"
+        }
+    ]
 }
