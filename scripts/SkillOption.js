@@ -20,7 +20,7 @@ export class SkillOption {
      */
     constructor(title, description, costs = [1], repeatable = true, level = 0) {
         if (costs.length === 0) {
-            throw new Error("");
+            throw new Error("No costs provided");
         }
 
         this.title = title;
