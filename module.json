@@ -24,12 +24,14 @@
     "relationships": {
         "systems": [
             {
-                "compatibility": {
-                    "minimum": "3",
-                    "verified": "3.3.1"
-                },
+                "id": "custom-system-builder-beta",
+                "type": "system",
+                "compatibility": {}
+            },
+            {
                 "id": "dnd5e",
-                "type": "system"
+                "type": "system",
+                "compatibility": {}
             }
         ]
     },
@@ -41,7 +43,12 @@
         {
             "name": "Classless Skill Tree 5E",
             "sorting": "a",
-            "packs": ["cst5e-items", "cst5e-journals"],
+            "packs": [
+                "cst5e-items",
+                "cst5e-journals",
+                "cst-actors",
+                "cst-items"
+            ],
             "color": null,
             "folders": []
         }
@@ -52,11 +59,11 @@
             "label": "CST5E - Items",
             "path": "packs/cst5e-items",
             "type": "Item",
+            "system": "dnd5e",
             "ownership": {
                 "PLAYER": "OBSERVER",
                 "ASSISTANT": "OWNER"
-            },
-            "system": "dnd5e"
+            }
         },
         {
             "name": "cst5e-journals",
@@ -66,8 +73,29 @@
             "ownership": {
                 "PLAYER": "OBSERVER",
                 "ASSISTANT": "OWNER"
-            },
-            "system": "dnd5e"
+            }
+        },
+        {
+            "name": "cst-items",
+            "label": "CST - Items",
+            "path": "packs/cst-items",
+            "type": "Item",
+            "system": "custom-system-builder-beta",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            }
+        },
+        {
+            "name": "cst-actors",
+            "label": "CST - Actors",
+            "path": "packs/cst-actors",
+            "type": "Actor",
+            "system": "custom-system-builder-beta",
+            "ownership": {
+                "PLAYER": "OBSERVER",
+                "ASSISTANT": "OWNER"
+            }
         }
     ]
 }
